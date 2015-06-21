@@ -1,5 +1,5 @@
-## The Purpose of this project is to write function to cache expensive computing operation of 
-## calculating inverse of an matrix using the concepts of learned under Lexical Scoping
+## The Purpose of this project is to write functions to cache expensive computing operation of 
+## calculating inverse of a matrix using the concepts of Lexical Scoping
 
 ## function1: makeCacheMatrix
 ## Creates a "Special" Matrix which is a list containing functions
@@ -22,9 +22,20 @@ list(set=set, get=get,
    getmatrix=getmatrix)
 }
 
+## function2:cacheSolve
+##This function computes the inverse of the special "matrix" returned by makeCacheMatrix above. If the inverse
+##has already been calculated (and the matrix has not changed), then the cachesolve retrieves the inverse from the cache
+## if not it calculates the inverse.
 
-## Write a short comment describing this function
-
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+cacheSolve <- function(x=matrix(), ...) {
+## returns the inverse of matrix
+    m<-x$getmatrix()
+    if(!is.null(m)){
+      message("getting cached data")
+      return(m)
+    }
+    matrix<-x$get()
+    m<-solve(matrix, ...)
+    x$setmatrix(m)
+    m
 }
